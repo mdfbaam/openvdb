@@ -21,8 +21,8 @@ Camera::Camera()
     , mFarPlane(10000.0)
     , mTarget(openvdb::Vec3d(0.0))
     , mLookAt(mTarget)
-    , mUp(openvdb::Vec3d(0.0, 1.0, 0.0))
-    , mForward(openvdb::Vec3d(0.0, 0.0, 1.0))
+    , mUp(openvdb::Vec3d(0.0, 0.0, 1.0))
+    , mForward(openvdb::Vec3d(0.0, 1.0, 0.0))
     , mRight(openvdb::Vec3d(1.0, 0.0, 0.0))
     , mEye(openvdb::Vec3d(0.0, 0.0, -1.0))
     , mTumblingSpeed(0.5)
@@ -113,14 +113,14 @@ Camera::aim()
         mChanged = false;
 
         mEye[0] = mLookAt[0] + mDistance * std::cos(mHead * sDeg2rad) * std::cos(mPitch * sDeg2rad);
-        mEye[1] = mLookAt[1] + mDistance * std::sin(mHead * sDeg2rad);
-        mEye[2] = mLookAt[2] + mDistance * std::cos(mHead * sDeg2rad) * std::sin(mPitch * sDeg2rad);
+        mEye[1] = mLookAt[1] + mDistance * std::cos(mHead * sDeg2rad) * std::sin(mPitch * sDeg2rad);
+        mEye[2] = mLookAt[2] + mDistance * std::sin(mHead * sDeg2rad);
 
         mForward = mLookAt - mEye;
         mForward.normalize();
 
-        mUp[1] = std::cos(mHead * sDeg2rad) > 0 ? 1.0 : -1.0;
-        mRight = mForward.cross(mUp);
+        mUp[2] = std::cos(mHead * sDeg2rad) > 0 ? 1.0 : -1.0;
+        mRight = mUp.cross(mForward);
     }
 
     // Set up modelview matrix
@@ -197,10 +197,10 @@ Camera::mousePosCallback(int x, int y)
     if (mMouseDown && !mZoomMode) {
         mNeedsDisplay = true;
         mHead += dy * mTumblingSpeed;
-        mPitch += dx * mTumblingSpeed;
+        mPitch -= dx * mTumblingSpeed;
     } else if (mMouseDown && mZoomMode) {
         mNeedsDisplay = true;
-        mLookAt += (dy * mUp - dx * mRight) * mStrafeSpeed;
+        mLookAt += (dy * mUp + dx * mRight) * mStrafeSpeed;
     }
 
     mMouseXPos = x;
