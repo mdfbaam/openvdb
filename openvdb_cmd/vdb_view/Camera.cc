@@ -145,6 +145,22 @@ Camera::keyCallback(int key, int)
                 case GLFW_KEY_SPACE:
                     mZoomMode = true;
                     break;
+                case GLFW_KEY_W:
+                    mHead += mTumblingSpeed;
+                    mChanged = true;
+                    break;
+                case GLFW_KEY_A:
+                    mPitch += mTumblingSpeed;
+                    mChanged = true;
+                    break;
+                case GLFW_KEY_S:
+                    mHead -= mTumblingSpeed;
+                    mChanged = true;
+                    break;
+                case GLFW_KEY_D:
+                    mPitch -= mTumblingSpeed;
+                    mChanged = true;
+                    break;
             }
             break;
         case GLFW_RELEASE:
