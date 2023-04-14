@@ -540,10 +540,10 @@ ViewportModule::render()
         }
 
         glBegin(GL_LINES);
-        glVertex3f(x, 0, 1);
-        glVertex3f(x, 0, -1);
-        glVertex3f(1, 0, x);
-        glVertex3f(-1, 0, x);
+        glVertex3f(x, 1, 0);
+        glVertex3f(x, -1, 0);
+        glVertex3f(1, x, 0);
+        glVertex3f(-1, x, 0);
         glEnd();
     }
 
