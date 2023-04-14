@@ -18,7 +18,7 @@ const double Camera::sDeg2rad = openvdb::math::pi<double>() / 180.0;
 Camera::Camera()
     : mFov(65.0)
     , mNearPlane(0.1)
-    , mFarPlane(10000.0)
+    , mFarPlane(std::numeric_limits<double>::max())
     , mTarget(openvdb::Vec3d(0.0))
     , mLookAt(mTarget)
     , mUp(openvdb::Vec3d(0.0, 0.0, 1.0))
