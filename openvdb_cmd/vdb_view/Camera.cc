@@ -214,7 +214,7 @@ Camera::mouseWheelCallback(int pos, int prevPos)
 {
     double speed = std::abs(prevPos - pos);
 
-    if (prevPos < pos) {
+    if (prevPos > pos) {
         mDistance += speed * mZoomSpeed;
     } else {
         double temp = mDistance - speed * mZoomSpeed;
