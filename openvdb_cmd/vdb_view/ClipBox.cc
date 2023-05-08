@@ -47,7 +47,7 @@ void
 ClipBox::update(double steps)
 {
     if (mXIsActive) {
-        GLdouble s = steps * mStepSize.x() * 4.0;
+        GLdouble s = steps * mStepSize.x();
 
         if (mShiftIsDown || mCtrlIsDown) {
             mLeftPlane[3] -= s;
@@ -63,7 +63,7 @@ ClipBox::update(double steps)
     }
 
     if (mYIsActive) {
-        GLdouble s = steps * mStepSize.y() * 4.0;
+        GLdouble s = steps * mStepSize.y();
 
         if (mShiftIsDown || mCtrlIsDown) {
             mTopPlane[3] -= s;
@@ -79,7 +79,7 @@ ClipBox::update(double steps)
     }
 
     if (mZIsActive) {
-        GLdouble s = steps * mStepSize.z() * 4.0;
+        GLdouble s = steps * mStepSize.z();
 
         if (mShiftIsDown || mCtrlIsDown) {
             mFrontPlane[3] -= s;
